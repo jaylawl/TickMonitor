@@ -54,30 +54,30 @@ public class TickMonitor implements Listener {
         this.durations10s.put(this.indices[1], duration);
         this.durations1m.put(this.indices[2], duration);
 
-        double totalOneMin = 0d;
-        double totalFiveMin = 0d;
-        double totalFifteenMin = 0d;
+        double totalOneSecond = 0d;
+        double totalTenSeconds = 0d;
+        double TotalOneMinute = 0d;
         for (double d : this.durations1s.values()) {
-            totalOneMin += d;
+            totalOneSecond += d;
         }
         for (double d : this.durations10s.values()) {
-            totalFiveMin += d;
+            totalTenSeconds += d;
         }
         for (double d : this.durations1m.values()) {
-            totalFifteenMin += d;
+            TotalOneMinute += d;
         }
-        this.averages[0] = totalOneMin / ((double) this.durations1s.size());
-        this.averages[1] = totalFiveMin / ((double) this.durations10s.size());
-        this.averages[2] = totalFifteenMin / ((double) this.durations1m.size());
+        this.averages[0] = totalOneSecond / ((double) this.durations1s.size());
+        this.averages[1] = totalTenSeconds / ((double) this.durations10s.size());
+        this.averages[2] = TotalOneMinute / ((double) this.durations1m.size());
 
         if (this.monitoringPlayers.size() > 0) {
             DecimalFormat decimalFormat = new DecimalFormat("#.##");
             String monitorOutput = (
                     "MSPT" +
                             " | now: " + decimalFormat.format(duration) + " ms" +
-                            " | 30s: " + decimalFormat.format(this.averages[0]) + " ms" +
-                            " | 1m: " + decimalFormat.format(this.averages[1]) + " ms" +
-                            " | 5m: " + decimalFormat.format(this.averages[2]) + " ms"
+                            " | 1s: " + decimalFormat.format(this.averages[0]) + " ms" +
+                            " | 10s: " + decimalFormat.format(this.averages[1]) + " ms" +
+                            " | 1m: " + decimalFormat.format(this.averages[2]) + " ms"
             );
             for (OfflinePlayer offlinePlayer : this.monitoringPlayers) {
                 if (offlinePlayer.isOnline()) {

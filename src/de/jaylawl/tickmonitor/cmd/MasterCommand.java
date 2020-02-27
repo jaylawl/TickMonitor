@@ -87,9 +87,9 @@ public class MasterCommand implements CommandExecutor, TabCompleter {
                 DecimalFormat decimalFormat = new DecimalFormat("#.##");
                 sender.sendMessage(
                         "Latest MSPT" +
-                                " | 30s: " + decimalFormat.format(averages[0]) + " ms" +
-                                " | 1m: " + decimalFormat.format(averages[1]) + " ms" +
-                                " | 5m: " + decimalFormat.format(averages[2]) + " ms"
+                                " | 1s: " + decimalFormat.format(averages[0]) + " ms" +
+                                " | 10s: " + decimalFormat.format(averages[1]) + " ms" +
+                                " | 1m: " + decimalFormat.format(averages[2]) + " ms"
                 );
                 break;
 
