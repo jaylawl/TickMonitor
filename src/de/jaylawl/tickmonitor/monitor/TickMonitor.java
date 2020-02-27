@@ -1,6 +1,8 @@
 package de.jaylawl.tickmonitor.monitor;
 
 import com.destroystokyo.paper.event.server.ServerTickEndEvent;
+import de.jaylawl.tickmonitor.event.MonitoringCycleCompleteEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -41,12 +43,24 @@ public class TickMonitor implements Listener {
         this.indices[2]++;
 
         if (this.indices[0] >= 20) {
+            Bukkit.getPluginManager().callEvent(new MonitoringCycleCompleteEvent(
+                    MonitoringCycleCompleteEvent.Timeframe.ONE_SECOND,
+                    new ArrayList<>(durations1s.values())
+            ));
             this.indices[0] = 1;
         }
         if (this.indices[1] >= 200) {
+            Bukkit.getPluginManager().callEvent(new MonitoringCycleCompleteEvent(
+                    MonitoringCycleCompleteEvent.Timeframe.TEN_SECONDS,
+                    new ArrayList<>(durations10s.values())
+            ));
             this.indices[1] = 1;
         }
         if (this.indices[2] >= 1200) {
+            Bukkit.getPluginManager().callEvent(new MonitoringCycleCompleteEvent(
+                    MonitoringCycleCompleteEvent.Timeframe.ONE_MINUTE,
+                    new ArrayList<>(durations1m.values())
+            ));
             this.indices[2] = 1;
         }
 
@@ -69,6 +83,8 @@ public class TickMonitor implements Listener {
         this.averages[0] = totalOneSecond / ((double) this.durations1s.size());
         this.averages[1] = totalTenSeconds / ((double) this.durations10s.size());
         this.averages[2] = TotalOneMinute / ((double) this.durations1m.size());
+
+
 
         if (this.monitoringPlayers.size() > 0) {
             DecimalFormat decimalFormat = new DecimalFormat("#.##");
