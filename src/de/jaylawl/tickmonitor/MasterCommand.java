@@ -44,7 +44,7 @@ public class MasterCommand implements CommandExecutor, TabCompleter {
         String mainArg;
 
         if (args.length == 0) {
-            return true;
+            mainArg = "getlatest";
         } else {
             mainArg = args[0].toLowerCase();
         }
