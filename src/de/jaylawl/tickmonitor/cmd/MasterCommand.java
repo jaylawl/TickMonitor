@@ -1,5 +1,8 @@
-package de.jaylawl.tickmonitor;
+package de.jaylawl.tickmonitor.cmd;
 
+import de.jaylawl.tickmonitor.Main;
+import de.jaylawl.tickmonitor.monitor.TickMonitor;
+import de.jaylawl.tickmonitor.util.TabHelper;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

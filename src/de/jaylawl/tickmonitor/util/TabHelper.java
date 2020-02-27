@@ -1,4 +1,4 @@
-package de.jaylawl.tickmonitor;
+package de.jaylawl.tickmonitor.util;
 
 import org.bukkit.util.StringUtil;
 

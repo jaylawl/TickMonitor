@@ -1,5 +1,7 @@
 package de.jaylawl.tickmonitor;
 
+import de.jaylawl.tickmonitor.cmd.MasterCommand;
+import de.jaylawl.tickmonitor.monitor.TickMonitor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;

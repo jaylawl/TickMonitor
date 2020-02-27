@@ -1,4 +1,4 @@
-package de.jaylawl.tickmonitor;
+package de.jaylawl.tickmonitor.monitor;
 
 import com.destroystokyo.paper.event.server.ServerTickEndEvent;
 import org.bukkit.OfflinePlayer;
@@ -18,9 +18,9 @@ public class TickMonitor implements Listener {
 
     private int[] indices = new int[]{0, 0, 0};
     private double[] averages = new double[]{0d, 0d, 0d};
-    private ConcurrentHashMap<Integer, Double> durations30s = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Integer, Double> durations1s = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Integer, Double> durations10s = new ConcurrentHashMap<>();
     private ConcurrentHashMap<Integer, Double> durations1m = new ConcurrentHashMap<>();
-    private ConcurrentHashMap<Integer, Double> durations5m = new ConcurrentHashMap<>();
 
     private Collection<OfflinePlayer> monitoringPlayers = new ArrayList<>();
 
@@ -40,35 +40,35 @@ public class TickMonitor implements Listener {
         this.indices[1]++;
         this.indices[2]++;
 
-        if (this.indices[0] >= 600) {
+        if (this.indices[0] >= 20) {
             this.indices[0] = 1;
         }
-        if (this.indices[1] >= 1200) {
+        if (this.indices[1] >= 200) {
             this.indices[1] = 1;
         }
-        if (this.indices[2] >= 6000) {
+        if (this.indices[2] >= 1200) {
             this.indices[2] = 1;
         }
 
-        this.durations30s.put(this.indices[0], duration);
-        this.durations1m.put(this.indices[1], duration);
-        this.durations5m.put(this.indices[2], duration);
+        this.durations1s.put(this.indices[0], duration);
+        this.durations10s.put(this.indices[1], duration);
+        this.durations1m.put(this.indices[2], duration);
 
         double totalOneMin = 0d;
         double totalFiveMin = 0d;
         double totalFifteenMin = 0d;
-        for (double d : this.durations30s.values()) {
+        for (double d : this.durations1s.values()) {
             totalOneMin += d;
         }
-        for (double d : this.durations1m.values()) {
+        for (double d : this.durations10s.values()) {
             totalFiveMin += d;
         }
-        for (double d : this.durations5m.values()) {
+        for (double d : this.durations1m.values()) {
             totalFifteenMin += d;
         }
-        this.averages[0] = totalOneMin / ((double) this.durations30s.size());
-        this.averages[1] = totalFiveMin / ((double) this.durations1m.size());
-        this.averages[2] = totalFifteenMin / ((double) this.durations5m.size());
+        this.averages[0] = totalOneMin / ((double) this.durations1s.size());
+        this.averages[1] = totalFiveMin / ((double) this.durations10s.size());
+        this.averages[2] = totalFifteenMin / ((double) this.durations1m.size());
 
         if (this.monitoringPlayers.size() > 0) {
             DecimalFormat decimalFormat = new DecimalFormat("#.##");
@@ -108,9 +108,9 @@ public class TickMonitor implements Listener {
     public void reset() {
         this.indices = new int[]{0, 0, 0};
         this.averages = new double[]{0d, 0d, 0d};
-        this.durations30s.clear();
+        this.durations1s.clear();
+        this.durations10s.clear();
         this.durations1m.clear();
-        this.durations5m.clear();
     }
 
     public void addMonitoringPlayer(Player player) {
