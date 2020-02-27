@@ -2,7 +2,7 @@ main: de.jaylawl.tickmonitor.Main
 name: TickMonitor
 version: "2.1.0"
 author: jaylawl
-website: https://github.com/jaylawl
+website: https://github.com/jaylawl/TickMonitor
 description: Monitor MSPT performance
 commands:
   tickmonitor:
