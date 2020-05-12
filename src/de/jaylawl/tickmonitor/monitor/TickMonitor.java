@@ -20,11 +20,11 @@ public class TickMonitor implements Listener {
 
     private int[] indices = new int[]{0, 0, 0};
     private double[] averages = new double[]{0d, 0d, 0d};
-    private ConcurrentHashMap<Integer, Double> durations1s = new ConcurrentHashMap<>();
-    private ConcurrentHashMap<Integer, Double> durations10s = new ConcurrentHashMap<>();
-    private ConcurrentHashMap<Integer, Double> durations1m = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Integer, Double> durations1s = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Integer, Double> durations10s = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Integer, Double> durations1m = new ConcurrentHashMap<>();
 
-    private Collection<OfflinePlayer> monitoringPlayers = new ArrayList<>();
+    private final Collection<OfflinePlayer> monitoringPlayers = new ArrayList<>();
 
     public TickMonitor() {
     }
@@ -83,8 +83,6 @@ public class TickMonitor implements Listener {
         this.averages[0] = totalOneSecond / ((double) this.durations1s.size());
         this.averages[1] = totalTenSeconds / ((double) this.durations10s.size());
         this.averages[2] = TotalOneMinute / ((double) this.durations1m.size());
-
-
 
         if (this.monitoringPlayers.size() > 0) {
             DecimalFormat decimalFormat = new DecimalFormat("#.##");

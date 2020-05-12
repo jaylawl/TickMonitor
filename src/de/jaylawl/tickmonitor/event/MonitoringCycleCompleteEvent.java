@@ -15,8 +15,8 @@ public class MonitoringCycleCompleteEvent extends Event {
     }
 
     private final static HandlerList HANDLER_LIST = new HandlerList();
-    private Timeframe timeframe;
-    private List<Double> data;
+    private final Timeframe timeframe;
+    private final List<Double> data;
 
     public MonitoringCycleCompleteEvent(Timeframe timeframe, List<Double> data) {
         this.timeframe = timeframe;
